@@ -1,0 +1,1149 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A Special Gift from Korea</title>
+<style>
+:root{
+--navy:#20344f;--blue:#4169d5;--ink:#263449;
+--muted:#69788d;--bg:#f5f7fa;--line:#dfe5ee;
+--light:#edf2ff;--green:#197a58;--red:#b8404b;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+font-family:Arial,"Malgun Gothic",sans-serif;line-height:1.7}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+button:disabled{opacity:.45;cursor:not-allowed}
+header{background:var(--navy);color:white;padding:23px 20px}
+header>div{max-width:1100px;margin:auto}
+header h1{font:normal 31px Georgia,serif;margin:0}
+header p{margin:3px 0;color:#dce5f2}
+main{max-width:1100px;margin:23px auto;padding:0 18px 60px}
+.card{background:white;border:1px solid var(--line);
+border-radius:16px;padding:23px;margin-bottom:18px}
+h2{font-size:22px;margin:0 0 10px}
+h3{font-size:17px;margin:0 0 8px}
+p{margin:8px 0}
+.small{font-size:13px;color:var(--muted)}
+.row{display:flex;gap:11px;align-items:center;flex-wrap:wrap}
+.between{justify-content:space-between}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+button.primary{background:var(--blue);color:white;border:0;
+border-radius:9px;padding:11px 18px;font-weight:bold}
+button.secondary{background:var(--light);color:#3555a5;border:0;
+border-radius:9px;padding:11px 18px;font-weight:bold}
+button.outline{background:white;color:var(--ink);
+border:1px solid var(--line);border-radius:9px;padding:11px 18px}
+button.mini{background:var(--light);color:#3555a5;border:0;
+border-radius:7px;padding:6px 11px;font-size:12px}
+input[type=text],textarea{width:100%;border:1px solid #cbd4e0;
+border-radius:10px;padding:12px;background:white;color:var(--ink)}
+textarea{resize:vertical;min-height:85px;line-height:1.8}
+textarea:focus,input:focus{outline:2px solid #b1c2fa}
+.nav{display:flex;gap:7px;overflow-x:auto;margin-bottom:20px}
+.nav button{min-width:145px;flex:1;background:white;
+border:1px solid var(--line);border-radius:10px;padding:11px 8px;
+font-size:13px;color:var(--muted);font-weight:bold}
+.nav button.active{background:var(--navy);color:white}
+.screen{display:none}
+.screen.active{display:block}
+.gift{border:2px solid var(--line);border-radius:12px;
+overflow:hidden;background:white;padding:0;text-align:left;color:var(--ink)}
+.gift.selected{border-color:var(--blue)}
+.gift img{width:100%;height:170px;object-fit:contain;background:#f2f2f2}
+.gift .info{padding:11px}
+.gift strong,.gift span{display:block}
+.gift span{font-size:12px;color:var(--muted)}
+.photo{width:100%;height:320px;object-fit:contain;
+background:#f3f3f3;border-radius:12px}
+.photo-error{background:#f1f4fa;border-radius:10px;
+padding:15px;text-align:center;font-size:13px}
+.photo-error a{color:var(--blue)}
+.note{background:#fff8e9;border-left:4px solid #ddb25e;
+padding:14px;border-radius:9px}
+.info-box{background:#f1f5ff;border-radius:10px;padding:15px}
+.levels{display:flex;gap:8px;margin:10px 0;flex-wrap:wrap}
+.levels button{flex:1;min-width:95px;background:white;
+border:1px solid var(--line);border-radius:9px;padding:12px 9px}
+.levels button.selected{background:var(--blue);color:white;border-color:var(--blue)}
+.levels small{display:block;font-size:11px}
+.tag{display:inline-block;background:var(--light);color:#3555a2;
+border-radius:20px;padding:4px 11px;font-size:12px;margin:3px}
+.progress{height:9px;background:#e8edf4;border-radius:12px;overflow:hidden}
+.progress div{height:100%;background:var(--blue);transition:width .2s}
+.option{display:block;width:100%;background:white;
+border:1px solid var(--line);border-radius:9px;padding:13px;
+margin:8px 0;text-align:left;color:var(--ink)}
+.option.correct{background:#e9f8f0;border-color:var(--green)}
+.option.wrong{background:#fff0f0;border-color:var(--red)}
+.feedback{background:#f1f5ff;padding:13px;border-radius:9px;margin:12px 0}
+.feedback.good{background:#e9f8f0;color:#176e4e}
+.feedback.bad{background:#fff0f0;color:#a43842}
+.wordtile{background:var(--light);color:#2d4f9d;
+border:1px solid #d4dfff;border-radius:8px;
+padding:9px 12px;font-weight:bold}
+.wordtile.used{opacity:.35}
+.dropzone{display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+border:2px dashed #ccd6e5;border-radius:11px;
+padding:12px;min-height:65px;margin:12px 0}
+.sentence-card{border:1px solid var(--line);
+border-radius:12px;padding:17px;margin:12px 0}
+.num{display:inline-grid;place-items:center;
+background:var(--light);color:var(--blue);border-radius:50%;
+width:30px;height:30px;font-weight:bold;margin-right:8px}
+.expression{border-bottom:1px solid var(--line);padding:9px 0}
+.expression strong{color:#3558a8}
+.example{display:none;background:#f2f6ff;padding:12px;
+border-radius:9px;margin-top:9px;font-size:14px}
+.example.visible{display:block}
+.preview{white-space:pre-wrap;background:#fafbfe;
+border:1px solid var(--line);border-radius:11px;
+padding:20px;line-height:2.1;min-height:110px}
+.checkrow{display:flex;gap:11px;padding:12px 0;
+border-bottom:1px solid var(--line);align-items:flex-start}
+.checkrow input{width:19px;height:19px;flex-shrink:0;margin-top:4px}
+.bottom{display:flex;justify-content:space-between;gap:10px;
+flex-wrap:wrap;margin-top:20px}
+.hidden{display:none!important}
+@media(max-width:760px){
+.grid2{grid-template-columns:1fr}
+.grid4{grid-template-columns:repeat(2,1fr)}
+.card{padding:17px}
+header h1{font-size:25px}
+.photo{height:240px}
+}
+@media print{
+header,.nav,.no-print,.bottom{display:none!important}
+body{background:white}
+main{margin:0;padding:0}
+.card{border:0;padding:8px}
+.screen{display:none!important}
+#screen5{display:block!important}
+}
+</style>
+</head>
+<body>
+
+<header>
+<div>
+<h1>A Special Gift from Korea</h1>
+<p>Culture · Vocabulary · Sentence Building · Paragraph Writing</p>
+</div>
+</header>
+
+<main>
+<nav class="nav no-print">
+<button class="active" onclick="go(1)">01 · Choose & Levels</button>
+<button onclick="go(2)">02 · Vocabulary</button>
+<button onclick="go(3)">03 · Sentence Builder</button>
+<button onclick="go(4)">04 · Writing</button>
+<button onclick="go(5)">05 · Final Check</button>
+</nav>
+
+<section class="screen active" id="screen1">
+<div class="card">
+<h2>Your Writing Mission</h2>
+<p>Your friend from another country is visiting Korea for the first time.</p>
+<p>You want to give your friend a traditional Korean gift.</p>
+<div class="note">
+<strong>수행평가 과제</strong>
+<p>외국인 친구에게 줄 한국의 전통 선물을 하나 고르세요. 선물의 특징, 용도, 문화적 배경, 선택한 이유를 포함하여 <strong>하나의 완결된 글을 7~8문장으로</strong> 작성하세요.</p>
+</div>
+</div>
+
+<div class="card">
+<h2>Choose Your Gift</h2>
+<div class="grid4" id="giftGrid"></div>
+</div>
+
+<div class="card">
+<h2>Adjust Task Complexity</h2>
+<div class="grid2">
+<div>
+<h3>Lexical Complexity</h3>
+<p class="small">어휘의 구체성 및 정교함</p>
+<div class="levels" id="lexButtons"></div>
+<p class="small" id="lexDescription"></p>
+</div>
+<div>
+<h3>Syntactic Complexity</h3>
+<p class="small">문장 구조 및 종속절의 복잡성</p>
+<div class="levels" id="synButtons"></div>
+<p class="small" id="synDescription"></p>
+</div>
+</div>
+<div class="info-box" id="levelPreview"></div>
+</div>
+
+<div class="card">
+<h2 id="giftTitle"></h2>
+<div class="grid2">
+<div>
+<img id="giftPhoto" class="photo" alt="전통 선물 실제 사진">
+<div class="photo-error hidden" id="photoError"></div>
+<p class="small" id="photoCredit"></p>
+</div>
+<div>
+<h3>What is it?</h3>
+<p id="giftDescription"></p>
+<h3>Cultural Background</h3>
+<div class="note" id="giftCulture"></div>
+</div>
+</div>
+<div class="bottom no-print">
+<span></span>
+<button class="primary" onclick="go(2)">Start Vocabulary →</button>
+</div>
+</div>
+</section>
+
+<section class="screen" id="screen2">
+<div class="card">
+<h2>STEP 2 · Vocabulary Challenge</h2>
+<p id="lexGoal"></p>
+<div class="row between">
+<span class="tag" id="lexTag"></span>
+<strong id="quizCount"></strong>
+</div>
+<div class="progress" style="margin:13px 0"><div id="quizBar"></div></div>
+<div id="quizArea"></div>
+</div>
+<div class="card hidden" id="quizDone">
+<h2>Vocabulary Complete!</h2>
+<p id="quizScore"></p>
+<button class="secondary" onclick="restartQuiz()">Try Again</button>
+<button class="primary" onclick="go(3)">Sentence Builder →</button>
+</div>
+<div class="bottom no-print">
+<button class="outline" onclick="go(1)">← Back</button>
+</div>
+</section>
+
+<section class="screen" id="screen3">
+<div class="card">
+<h2>STEP 3 · Sentence Builder</h2>
+<p id="syntaxGoal"></p>
+<div class="info-box" id="syntaxRules"></div>
+</div>
+<div class="card">
+<div class="row between">
+<span class="tag" id="syntaxTag"></span>
+<strong id="patternCount"></strong>
+</div>
+<div class="progress" style="margin:13px 0"><div id="patternBar"></div></div>
+<div id="patternArea"></div>
+</div>
+<div class="card hidden" id="patternDone">
+<h2>Sentence Practice Complete!</h2>
+<p>이제 연습한 표현을 활용해 하나의 완결된 문단을 작성하세요.</p>
+<button class="primary" onclick="go(4)">Paragraph Writing →</button>
+</div>
+<div class="bottom no-print">
+<button class="outline" onclick="go(2)">← Vocabulary</button>
+</div>
+</section>
+
+<section class="screen" id="screen4">
+<div class="card">
+<h2>STEP 4 · Build a Coherent Paragraph</h2>
+<p>문장 8개를 따로 만드는 것이 아니라, <strong>하나의 중심 생각을 발전시키는 글</strong>을 작성하세요.</p>
+<div id="writingTags"></div>
+<div class="info-box" style="margin-top:13px">
+<strong>Paragraph Structure</strong>
+<p>Context → Topic Sentence → Description → Traditional Use → Cultural Meaning → Personal Reason → Conclusion</p>
+</div>
+<div class="progress" style="margin:14px 0"><div id="writingBar"></div></div>
+<p class="small" id="writingCount"></p>
+</div>
+
+<div class="grid2">
+<div class="card">
+<h3>Lexical Resource Bank</h3>
+<div id="lexBank"></div>
+</div>
+<div class="card">
+<h3>Syntactic Resource Bank</h3>
+<div id="syntaxBank"></div>
+</div>
+</div>
+
+<div class="card">
+<h3>Your Paragraph So Far</h3>
+<p class="small">아래에 문장을 작성하면 이곳에 누적되어 나타납니다. 앞 문장과 자연스럽게 연결되는지 확인하세요.</p>
+<div class="preview" id="livePreview">Your paragraph will appear here...</div>
+</div>
+
+<div class="card">
+<div id="writingArea"></div>
+<div class="bottom no-print">
+<button class="outline" onclick="go(3)">← Sentence Builder</button>
+<button class="primary" onclick="prepareFinal(true)">Complete My Paragraph →</button>
+</div>
+</div>
+</section>
+
+<section class="screen" id="screen5">
+<div class="card">
+<h2>STEP 5 · My Final Paragraph</h2>
+<div id="finalTags"></div>
+<h3 id="finalTitle" style="margin-top:15px"></h3>
+<div class="preview" id="finalText"></div>
+<p class="small" id="finalStats"></p>
+<div class="row no-print">
+<button class="secondary" onclick="go(4)">Edit Writing</button>
+<button class="outline" onclick="toggleModel()">Show Model Answer</button>
+</div>
+<div id="modelBox" class="example"></div>
+</div>
+
+<div class="card">
+<h2>Self-Editing Checklist</h2>
+<p>자신의 글을 처음부터 끝까지 읽으면서 실제로 확인한 항목에 체크하세요.</p>
+<div id="checklist"></div>
+<div class="progress" style="margin:18px 0 8px"><div id="checkBar"></div></div>
+<p class="small" id="checkCount"></p>
+<div class="bottom no-print">
+<button class="outline" onclick="go(4)">← Revise Writing</button>
+<button class="primary" id="submitButton" disabled onclick="submitWriting()">
+Submit My Writing ✓</button>
+</div>
+</div>
+
+<div class="card hidden" id="completed">
+<h2>Writing Complete!</h2>
+<p>You have completed your Korean cultural gift paragraph.</p>
+<div class="row no-print">
+<button class="secondary" onclick="downloadWriting()">Save TXT</button>
+<button class="outline" onclick="window.print()">Print</button>
+<button class="primary" onclick="go(1)">Choose Another Gift</button>
+</div>
+</div>
+</section>
+</main>
+
+<script>
+"use strict";
+
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({
+"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+}[c]));
+const shuffle=a=>{
+const b=[...a];
+for(let i=b.length-1;i>0;i--){
+const j=Math.floor(Math.random()*(i+1));
+[b[i],b[j]]=[b[j],b[i]];
+}
+return b;
+};
+const normalize=s=>s.toLowerCase().replace(/[’‘]/g,"'")
+.replace(/[^a-z0-9'\s]/g," ").replace(/\s+/g," ").trim();
+
+/*
+ Photos are remote, but each gift has several candidate sources.
+ No illustration is substituted for a failed photograph.
+*/
+const gifts=[
+{
+id:"fan",ko:"전통 부채",en:"Traditional Korean Fan",
+photos:[
+"https://www.museumshop.or.kr/center/files/upload/20240227/20240227111350_bqirpstc.jpg",
+"https://commons.wikimedia.org/wiki/Special:FilePath/Korean%20fan.jpg",
+"https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=900"
+],
+search:"https://commons.wikimedia.org/w/index.php?search=Korean+traditional+fan&title=Special:MediaSearch&type=image",
+description:"A traditional Korean fan creates a cool breeze. Folding fans are often made of bamboo and paper and may feature paintings or calligraphy.",
+culture:"부채는 생활용품이자 전통 공예품입니다. 그림과 서예로 장식되기도 했으며, 과거에는 단오 무렵 부채를 선물하는 풍습도 있었습니다.",
+lex:[
+[["fan","부채"],["paper","종이"],["bamboo","대나무"],["beautiful","아름다운"],["summer","여름"],["cool","시원한"]],
+[["folding fan","접이식 부채"],["painting","그림"],["calligraphy","서예"],["traditional","전통적인"],["decorate","장식하다"],["useful","유용한"]],
+[["craftsmanship","장인정신·공예 기술"],["artistic","예술적인"],["cultural heritage","문화유산"],["custom","풍습"],["symbolic","상징적인"],["represent","나타내다"]]
+],
+facts:[
+"It is often made of bamboo and paper.",
+"Some fans have paintings or calligraphy.",
+"People use fans to make a cool breeze.",
+"In the past, Koreans sometimes gave fans as seasonal gifts."
+],
+models:[
+[
+"My friend is visiting Korea for the first time.",
+"I want to give my friend a Korean fan.",
+"It is beautiful and light.",
+"It is made of paper and bamboo.",
+"People use it in summer.",
+"It is a traditional Korean gift.",
+"I chose it because it is useful.",
+"I hope my friend will like it."
+],
+[
+"My friend is visiting Korea for the first time.",
+"I want to give my friend a traditional folding fan.",
+"It is made of bamboo and paper.",
+"It has beautiful paintings on it.",
+"People use it to make a cool breeze.",
+"In the past, Koreans also gave fans as gifts.",
+"I chose it because it shows Korean culture.",
+"I hope my friend will remember Korea."
+],
+[
+"My friend, who loves art, is visiting Korea.",
+"I want to give my friend a traditional Korean folding fan.",
+"The fan, which is made of bamboo and paper, has artistic decorations.",
+"It is an example of traditional Korean craftsmanship.",
+"Although it is a practical object, it can also be a work of art.",
+"In the past, fans were sometimes given as seasonal gifts.",
+"I chose it because it represents both beauty and tradition.",
+"I hope my friend will remember Korean culture whenever they use it."
+]
+]
+},
+{
+id:"spoon",ko:"전통 수저 세트",en:"Korean Spoon and Chopsticks",
+photos:[
+"https://shop.genesis.com/upload/goods/98/2021/detailContentsEditorPC-a6b21c2545bb8f9427630e3e7c075414.jpg",
+"https://commons.wikimedia.org/wiki/Special:FilePath/Sujeo.jpg"
+],
+search:"https://commons.wikimedia.org/w/index.php?search=Korean+sujeo+spoon+chopsticks&title=Special:MediaSearch&type=image",
+description:"Traditional Korean spoon and chopsticks sets can be made of brass. Spoons and chopsticks are used together in Korean dining culture.",
+culture:"한국의 식문화에서는 숟가락과 젓가락을 함께 사용합니다. 전통 방짜유기 수저는 놋쇠로 제작되며 전통 식기나 선물로 사용됩니다.",
+lex:[
+[["spoon","숟가락"],["chopsticks","젓가락"],["rice","밥"],["soup","국"],["metal","금속"],["food","음식"]],
+[["brass","놋쇠"],["side dish","반찬"],["dining culture","식문화"],["traditional set","전통 세트"],["meal","식사"],["practical","실용적인"]],
+[["tableware","식기류"],["culinary tradition","음식 문화의 전통"],["craftsmanship","공예 기술"],["reflect","반영하다"],["distinctive","독특한"],["cultural practice","문화적 관습"]]
+],
+facts:[
+"Traditional sets can be made of brass.",
+"Koreans use spoons for rice and soup.",
+"Chopsticks are used for many side dishes.",
+"Using both utensils is a feature of Korean dining culture."
+],
+models:[
+[
+"My friend is visiting Korea.",
+"I want to give my friend a spoon and chopsticks set.",
+"It is made of metal.",
+"It has a golden color.",
+"People use it to eat food.",
+"Koreans use spoons and chopsticks together.",
+"I chose it because it is useful.",
+"I hope my friend will enjoy it."
+],
+[
+"My friend is visiting Korea for the first time.",
+"I want to give my friend a traditional spoon and chopsticks set.",
+"This set is made of brass.",
+"It has a beautiful golden color.",
+"Koreans use spoons for rice and soup.",
+"They often use chopsticks for side dishes.",
+"I chose it because it shows Korean dining culture.",
+"I hope my friend will enjoy Korean meals with it."
+],
+[
+"My friend, who enjoys Korean food, is visiting Korea.",
+"I want to give my friend a traditional brass spoon and chopsticks set.",
+"This tableware, which is made of brass, reflects Korean craftsmanship.",
+"Its distinctive golden surface makes it an attractive gift.",
+"While spoons are commonly used for rice and soup, chopsticks are used for many side dishes.",
+"Using both utensils is an important part of Korean dining culture.",
+"I chose it because it represents a familiar Korean cultural practice.",
+"I hope my friend will think of Korea whenever they use the set."
+]
+]
+},
+{
+id:"daenggi",ko:"전통 댕기",en:"Traditional Daenggi",
+photos:[
+"https://thumbnail.coupangcdn.com/thumbnails/remote/492x492ex/image/vendor_inventory/5ce8/d0c0ad40badf9eb5815306c345250acd131e7ae9c85600bc44dc45915407.jpeg",
+"https://commons.wikimedia.org/wiki/Special:FilePath/Daenggi.jpg"
+],
+search:"https://commons.wikimedia.org/w/index.php?search=Korean+daenggi+hair+ribbon&title=Special:MediaSearch&type=image",
+description:"A daenggi is a traditional Korean ribbon used to tie or decorate hair. It can be made of colorful fabric.",
+culture:"댕기는 머리를 묶거나 땋은 머리를 장식하는 전통 장신구입니다. 과거 어린이와 혼인하지 않은 여성의 머리 모양에서 흔히 볼 수 있었습니다.",
+lex:[
+[["ribbon","리본"],["hair","머리카락"],["colorful","다채로운"],["wear","착용하다"],["pretty","예쁜"],["hanbok","한복"]],
+[["hair accessory","머리 장신구"],["braided hair","땋은 머리"],["silk","비단"],["decorate","장식하다"],["fabric","직물"],["traditional fashion","전통 복식"]],
+[["textile","직물·섬유 제품"],["ornamental","장식용의"],["hairstyle","머리 모양"],["historical","역사적인"],["cultural identity","문화적 정체성"],["reflect","반영하다"]]
+],
+facts:[
+"A daenggi is a traditional hair ribbon.",
+"It can be made of colorful fabric.",
+"People use it to decorate braided hair.",
+"It was commonly worn by children and unmarried women in the past."
+],
+models:[
+[
+"My friend is visiting Korea.",
+"I want to give my friend a daenggi.",
+"It is a Korean hair ribbon.",
+"It has many beautiful colors.",
+"People wear it in their hair.",
+"It is a traditional Korean item.",
+"I chose it because it is pretty.",
+"I hope my friend will like it."
+],
+[
+"My friend is visiting Korea for the first time.",
+"I want to give my friend a traditional daenggi.",
+"A daenggi is a Korean hair accessory.",
+"It can be made of colorful silk.",
+"People use it to decorate braided hair.",
+"In the past, girls and unmarried women often wore daenggi.",
+"I chose it because it shows traditional Korean fashion.",
+"I hope my friend will enjoy wearing it."
+],
+[
+"My friend, who is interested in fashion, is visiting Korea.",
+"I want to give my friend a traditional Korean daenggi.",
+"A daenggi is an ornamental ribbon that is used to decorate hair.",
+"Its colorful textile design reflects traditional Korean fashion.",
+"In the past, it was often worn with braided hairstyles.",
+"Although it is a historical accessory, people can still wear it with hanbok.",
+"I chose it because it represents a beautiful part of Korean cultural identity.",
+"I hope my friend will appreciate its traditional design."
+]
+]
+},
+{
+id:"norigae",ko:"전통 노리개",en:"Traditional Norigae",
+photos:[
+"https://nativekorean.com/cdn/shop/files/gold-ornaments-tassel-norigae-native-korean-98695.jpg?v=1743996454&width=860",
+"https://commons.wikimedia.org/wiki/Special:FilePath/Norigae.jpg"
+],
+search:"https://commons.wikimedia.org/w/index.php?search=Korean+norigae+ornament&title=Special:MediaSearch&type=image",
+description:"A norigae is a traditional Korean ornament often worn with hanbok. It can have colorful knots, pendants, and tassels.",
+culture:"노리개는 한복에 달아 장식하는 전통 장신구입니다. 매듭과 술, 장식 부분으로 이루어지며 문양에 따라 행복, 행운, 장수 등의 의미를 담기도 합니다.",
+lex:[
+[["gift","선물"],["colorful","다채로운"],["pretty","예쁜"],["hanbok","한복"],["luck","행운"],["decoration","장식"]],
+[["ornament","장신구"],["knot","매듭"],["tassel","술 장식"],["symbolize","상징하다"],["happiness","행복"],["traditional","전통적인"]],
+[["symbolism","상징성"],["auspicious","길조의·좋은 징조의"],["craftsmanship","공예 기술"],["represent","나타내다"],["cultural significance","문화적 중요성"],["ornamental","장식용의"]]
+],
+facts:[
+"A norigae is a traditional Korean ornament.",
+"It can have colorful knots and tassels.",
+"It was traditionally worn with hanbok.",
+"Some designs symbolize happiness, good luck, or long life."
+],
+models:[
+[
+"My friend is visiting Korea.",
+"I want to give my friend a norigae.",
+"It is a Korean decoration.",
+"It has beautiful colors.",
+"People wear it with hanbok.",
+"Some designs mean good luck.",
+"I chose it because it is pretty.",
+"I hope my friend will like it."
+],
+[
+"My friend is visiting Korea for the first time.",
+"I want to give my friend a traditional norigae.",
+"A norigae is a Korean ornament.",
+"It has colorful knots and long tassels.",
+"People traditionally wore it with hanbok.",
+"Some designs symbolize good luck and happiness.",
+"I chose it because I want to wish my friend good luck.",
+"I hope my friend will remember Korea."
+],
+[
+"My friend, who is interested in Korean culture, is visiting Korea.",
+"I want to give my friend a traditional norigae.",
+"A norigae is an ornamental accessory that has cultural significance.",
+"Its colorful knots and tassels reflect traditional craftsmanship.",
+"It was traditionally worn with hanbok.",
+"Some designs are associated with auspicious meanings, such as happiness and good luck.",
+"I chose it because its symbolism expresses my good wishes.",
+"I hope my friend will treasure it as a memory of Korea."
+]
+]
+}
+];
+
+const lexDescriptions=[
+"일상적이고 친숙한 기본 어휘",
+"구체적인 문화 관련 어휘와 정확한 명칭",
+"추상적인 문화적 의미와 상징성을 나타내는 어휘"
+];
+const synDescriptions=[
+"단순문 중심: Subject + Verb + Object",
+"because, when, to부정사를 활용한 문장 확장",
+"관계절, 수동태, although, while 등을 활용한 복합문"
+];
+
+const patterns=[
+[
+"I want to give my friend a gift.",
+"It is very beautiful.",
+"People use it every day.",
+"I hope my friend likes it."
+],
+[
+"I chose this gift because it is special.",
+"People use it to decorate their clothes.",
+"When my friend visits Korea, I will give this gift.",
+"I want my friend to remember Korea."
+],
+[
+"This is a gift that represents Korean culture.",
+"It was traditionally used as an ornament.",
+"Although it is small, it has a special meaning.",
+"I chose it because I wanted to share Korean culture."
+]
+];
+
+const syntaxRules=[
+[
+["I want to give + 사람 + 사물","누구에게 무엇을 주고 싶은지 표현"],
+["It is + 형용사","선물의 특징을 설명"],
+["People use + 사물","용도를 설명"]
+],
+[
+["I chose it because + 절","선택한 이유를 설명"],
+["People use it to + 동사원형","용도와 목적을 설명"],
+["When + 절, 주절","시간 관계를 표현"]
+],
+[
+["명사 + that/which + 절","관계절로 명사를 자세히 설명"],
+["be + 과거분사","수동태로 전통적 용도를 설명"],
+["Although + 절, 주절","대조나 양보를 표현"],
+["While + 절, 주절","두 특징을 비교"]
+]
+];
+
+const discourseSteps=[
+{
+role:"Context",
+title:"Introduce the Situation",
+guide:"친구가 한국에 방문한다는 상황으로 글을 시작하세요.",
+link:"이 문장은 글의 배경을 설정합니다."
+},
+{
+role:"Topic Sentence",
+title:"Introduce Your Gift",
+guide:"친구에게 줄 선물을 명확하게 소개하고 글의 중심 주제를 정하세요.",
+link:"1번의 방문 상황과 연결되어야 합니다."
+},
+{
+role:"Supporting Detail 1",
+title:"Describe Its Appearance",
+guide:"선물의 재료, 색깔, 모양을 설명하세요.",
+link:"2번에서 소개한 선물을 it, this gift 등으로 이어 설명하세요."
+},
+{
+role:"Supporting Detail 2",
+title:"Add a Specific Feature",
+guide:"앞 문장과 중복되지 않는 구체적인 특징을 추가하세요.",
+link:"3번의 외형 설명을 더 구체적으로 발전시키세요."
+},
+{
+role:"Cultural Background",
+title:"Explain Its Traditional Use",
+guide:"과거 또는 현재 한국에서 어떻게 사용했는지 설명하세요.",
+link:"외형 설명에서 사용 방법으로 자연스럽게 이동하세요."
+},
+{
+role:"Cultural Significance",
+title:"Explain Its Cultural Meaning",
+guide:"한국 문화에서 어떤 의미가 있는지, 어떤 전통과 연결되는지 설명하세요.",
+link:"5번의 용도에서 문화적 의미로 내용을 확장하세요."
+},
+{
+role:"Personal Reason",
+title:"Explain Your Choice",
+guide:"앞에서 설명한 특징이나 문화적 의미를 근거로 선택 이유를 쓰세요.",
+link:"3~6번의 내용 중 한 가지를 근거로 활용하세요."
+},
+{
+role:"Concluding Sentence",
+title:"End with Your Wish",
+guide:"친구가 이 선물을 통해 무엇을 느끼거나 기억하기를 바라는지 쓰세요.",
+link:"2번의 선물 소개와 7번의 선택 이유를 연결하며 마무리하세요."
+}
+];
+
+const starters=[
+[
+"My friend is visiting Korea.",
+"I want to give my friend ...",
+"It is ...",
+"It has ...",
+"People use it ...",
+"It is a traditional Korean ...",
+"I chose it because ...",
+"I hope my friend ..."
+],
+[
+"My friend is visiting Korea for the first time.",
+"I want to give my friend ...",
+"It is made of ...",
+"It also has ...",
+"People use it to ...",
+"In the past, ...",
+"I chose it because ...",
+"I hope my friend will ..."
+],
+[
+"My friend, who ..., is visiting Korea.",
+"I want to give my friend ...",
+"It is a traditional object that ...",
+"Another distinctive feature is ...",
+"Although ..., people ...",
+"It has cultural significance because ...",
+"I chose it because ...",
+"I hope my friend will ... whenever ..."
+]
+];
+
+const baseChecks=[
+"글 전체가 하나의 선물이라는 중심 주제를 유지하나요?",
+"첫 부분에 상황과 중심 문장이 명확하게 제시되었나요?",
+"선물의 외형, 용도, 문화적 배경이 논리적인 순서로 설명되었나요?",
+"앞 문장과 다음 문장이 자연스럽게 연결되나요?",
+"it, this gift 등의 지시 표현이 무엇을 가리키는지 명확한가요?",
+"선택 이유가 앞에서 설명한 특징이나 문화적 의미와 연결되나요?",
+"마지막 문장이 글의 내용을 자연스럽게 마무리하나요?",
+"주어·동사, 시제, 철자, 대문자, 문장부호를 확인했나요?"
+];
+
+let state={
+gift:0,lex:2,syn:2,step:1,
+drafts:{},checked:[],submitted:false
+};
+let quiz=[],quizIndex=0,quizScore=0,quizLocked=false;
+let patternIndex=0,selectedTiles=[],tileOrder=[],typingUnlocked=false;
+let photoRequest=0;
+
+function currentGift(){return gifts[state.gift]}
+
+function loadPhoto(img,urls,onFailure){
+let index=0;
+const request=++photoRequest;
+img.onload=()=>{};
+img.onerror=()=>{
+if(request!==photoRequest)return;
+index++;
+if(index<urls.length)img.src=urls[index];
+else{
+img.removeAttribute("src");
+if(onFailure)onFailure();
+}
+};
+img.src=urls[0];
+}
+
+function renderPhotos(){
+const g=currentGift();
+const main=$("giftPhoto");
+$("photoError").classList.add("hidden");
+loadPhoto(main,g.photos,()=>{
+$("photoError").innerHTML=
+`사진을 자동으로 불러오지 못했습니다.<br>
+<a href="${g.search}" target="_blank" rel="noopener noreferrer">
+${esc(g.ko)} 실제 사진 찾아보기</a>`;
+$("photoError").classList.remove("hidden");
+});
+$("giftGrid").innerHTML=gifts.map((x,i)=>`
+<button class="gift ${i===state.gift?"selected":""}"
+onclick="chooseGift(${i})">
+<img id="thumb${i}" alt="${esc(x.ko)} 실제 사진">
+<div class="info"><strong>${x.ko}</strong><span>${x.en}</span></div>
+</button>`).join("");
+gifts.forEach((x,i)=>{
+const img=$("thumb"+i);
+let k=0;
+img.onerror=()=>{
+k++;
+if(k<x.photos.length)img.src=x.photos[k];
+else img.alt=x.ko+" 사진 로딩 실패";
+};
+img.src=x.photos[0];
+});
+}
+
+function saveDraft(){
+const inputs=document.querySelectorAll(".writing-input");
+if(inputs.length){
+state.drafts[currentGift().id]=Array.from(inputs,x=>x.value);
+}
+}
+
+function go(step){
+if(state.step===4)saveDraft();
+if(step===5&&!prepareFinal(false))return;
+state.step=step;
+document.querySelectorAll(".screen").forEach((e,i)=>
+e.classList.toggle("active",i===step-1));
+document.querySelectorAll(".nav button").forEach((e,i)=>
+e.classList.toggle("active",i===step-1));
+if(step===4)renderWriting();
+window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function renderGift(){
+const g=currentGift();
+renderPhotos();
+$("giftTitle").textContent=g.en+" · "+g.ko;
+$("photoCredit").textContent="Photo: online product or cultural photograph";
+$("giftDescription").textContent=g.description;
+$("giftCulture").textContent=g.culture;
+renderLevels();
+}
+
+function chooseGift(i){
+saveDraft();
+state.gift=i;
+state.checked=[];
+state.submitted=false;
+$("completed").classList.add("hidden");
+renderGift();
+restartQuiz();
+restartPatterns();
+}
+
+function setLevel(type,n){
+saveDraft();
+state[type]=n;
+state.checked=[];
+state.submitted=false;
+renderLevels();
+restartQuiz();
+restartPatterns();
+}
+
+function renderLevels(){
+for(const [type,id] of [["lex","lexButtons"],["syn","synButtons"]]){
+$(id).innerHTML=[1,2,3].map(n=>`
+<button class="${state[type]===n?"selected":""}"
+onclick="setLevel('${type}',${n})">
+Level ${n}<small>${["Basic","Intermediate","Advanced"][n-1]}</small>
+</button>`).join("");
+}
+$("lexDescription").textContent=lexDescriptions[state.lex-1];
+$("synDescription").textContent=synDescriptions[state.syn-1];
+$("levelPreview").innerHTML=`
+<strong>Task Profile: Lexical L${state.lex} × Syntactic S${state.syn}</strong>
+<p>${lexDescriptions[state.lex-1]}</p>
+<p>${synDescriptions[state.syn-1]}</p>`;
+}
+
+/* STEP 2 */
+function restartQuiz(){
+quiz=shuffle(currentGift().lex[state.lex-1]);
+quizIndex=0;quizScore=0;quizLocked=false;
+$("quizDone").classList.add("hidden");
+renderQuiz();
+}
+
+function renderQuiz(){
+$("lexTag").textContent=`Lexical Level ${state.lex}`;
+$("lexGoal").textContent=lexDescriptions[state.lex-1];
+if(quizIndex>=quiz.length){
+$("quizArea").innerHTML="";
+$("quizBar").style.width="100%";
+$("quizScore").textContent=`Score: ${quizScore} / ${quiz.length}`;
+$("quizDone").classList.remove("hidden");
+return;
+}
+quizLocked=false;
+const [word,meaning]=quiz[quizIndex];
+const alternatives=shuffle(currentGift().lex[state.lex-1]
+.filter(w=>w[0]!==word)).slice(0,3).map(w=>w[1]);
+const options=shuffle([meaning,...alternatives]);
+$("quizCount").textContent=`${quizIndex+1} / ${quiz.length}`;
+$("quizBar").style.width=`${quizIndex/quiz.length*100}%`;
+$("quizArea").innerHTML=`
+<p class="small">Choose the correct meaning.</p>
+<h2 style="font-size:29px">${esc(word)}</h2>
+${options.map((o,i)=>`
+<button class="option" data-answer="${i}" data-meaning="${esc(o)}">${esc(o)}</button>
+`).join("")}
+<div id="quizFeedback"></div>
+<button class="primary hidden" id="quizNext" onclick="nextQuiz()">
+${quizIndex===quiz.length-1?"Finish":"Next →"}</button>`;
+document.querySelectorAll("[data-answer]").forEach(b=>{
+b.addEventListener("click",()=>answerQuiz(b,meaning));
+});
+}
+
+function answerQuiz(button,meaning){
+if(quizLocked)return;
+quizLocked=true;
+const correct=button.dataset.meaning===meaning;
+if(correct)quizScore++;
+document.querySelectorAll("[data-answer]").forEach(b=>{
+if(b.dataset.meaning===meaning)b.classList.add("correct");
+else if(b===button)b.classList.add("wrong");
+b.disabled=true;
+});
+$("quizFeedback").innerHTML=`<div class="feedback ${correct?"good":"bad"}">
+${correct?"✓ Correct!":"△ Review this word."}
+<br>${esc(quiz[quizIndex][0])} = ${esc(meaning)}</div>`;
+$("quizNext").classList.remove("hidden");
+}
+function nextQuiz(){quizIndex++;renderQuiz()}
+
+/* STEP 3 */
+function restartPatterns(){
+patternIndex=0;
+$("patternDone").classList.add("hidden");
+renderPattern();
+}
+
+function renderPattern(){
+const list=patterns[state.syn-1];
+$("syntaxTag").textContent=`Syntactic Level ${state.syn}`;
+$("syntaxGoal").textContent=synDescriptions[state.syn-1];
+$("syntaxRules").innerHTML=syntaxRules[state.syn-1]
+.map(([form,meaning])=>`<p><strong>${esc(form)}</strong>
+<span class="small"> — ${esc(meaning)}</span></p>`).join("");
+if(patternIndex>=list.length){
+$("patternArea").innerHTML="";
+$("patternBar").style.width="100%";
+$("patternDone").classList.remove("hidden");
+return;
+}
+const sentence=list[patternIndex];
+tileOrder=shuffle(sentence.split(/\s+/).map((text,id)=>({text,id})));
+selectedTiles=[];
+typingUnlocked=false;
+$("patternCount").textContent=`${patternIndex+1} / ${list.length}`;
+$("patternBar").style.width=`${patternIndex/list.length*100}%`;
+$("patternArea").innerHTML=`
+<h3>Part A · Arrange the Words</h3>
+<p class="small">단어를 순서대로 클릭하세요.</p>
+<div class="dropzone" id="dropzone"></div>
+<div class="row" id="tiles"></div>
+<div class="row" style="margin-top:14px">
+<button class="secondary" onclick="resetTiles()">Reset</button>
+<button class="primary" onclick="checkOrder()">Check Order</button>
+</div>
+<div id="orderFeedback"></div>
+<div class="hidden" id="typingSection" style="margin-top:22px">
+<h3>Part B · Type the Sentence</h3>
+<p class="small">완성한 문장을 직접 타이핑하세요.</p>
+<input type="text" id="typingInput" autocomplete="off">
+<button class="primary" style="margin-top:12px" onclick="checkTyping()">Check Writing</button>
+<div id="typingFeedback"></div>
+</div>`;
+renderTiles();
+}
+
+function renderTiles(){
+const ids=new Set(selectedTiles.map(t=>t.id));
+$("tiles").innerHTML=tileOrder.map(t=>`
+<button class="wordtile ${ids.has(t.id)?"used":""}"
+data-tile="${t.id}" ${ids.has(t.id)?"disabled":""}>${esc(t.text)}</button>
+`).join("");
+document.querySelectorAll("[data-tile]").forEach(b=>{
+b.onclick=()=>{
+const tile=tileOrder.find(t=>t.id===Number(b.dataset.tile));
+if(tile&&!selectedTiles.some(t=>t.id===tile.id)){
+selectedTiles.push(tile);renderTiles();
+}
+};
+});
+$("dropzone").innerHTML=selectedTiles.length?
+selectedTiles.map((t,i)=>`
+<button class="wordtile" data-remove="${i}">${esc(t.text)} ×</button>`).join("")
+:"Click the words below...";
+document.querySelectorAll("[data-remove]").forEach(b=>{
+b.onclick=()=>{selectedTiles.splice(Number(b.dataset.remove),1);renderTiles()};
+});
+}
+
+function resetTiles(){
+selectedTiles=[];renderTiles();
+$("orderFeedback").innerHTML="";
+}
+
+function checkOrder(){
+const expected=patterns[state.syn-1][patternIndex].split(/\s+/);
+const correct=selectedTiles.length===expected.length&&
+selectedTiles.every((t,i)=>t.id===i);
+$("orderFeedback").innerHTML=correct?
+`<div class="feedback good">✓ Correct word order!</div>`:
+`<div class="feedback bad">△ Check the order.
+Hint: Find the subject and main verb first.</div>`;
+if(correct){
+typingUnlocked=true;
+$("typingSection").classList.remove("hidden");
+}
+}
+
+function checkTyping(){
+if(!typingUnlocked)return;
+const expected=patterns[state.syn-1][patternIndex];
+const typed=$("typingInput").value.trim();
+if(normalize(typed)===normalize(expected)){
+$("typingFeedback").innerHTML=`
+<div class="feedback good">✓ Correct sentence!</div>
+<button class="primary" onclick="nextPattern()">
+${patternIndex===3?"Finish Practice":"Next Pattern →"}</button>`;
+$("typingInput").disabled=true;
+}else{
+$("typingFeedback").innerHTML=
+`<div class="feedback bad">Check spelling and word order. Try again.</div>`;
+}
+}
+function nextPattern(){patternIndex++;renderPattern()}
+
+/* STEP 4 */
+function renderWriting(){
+const g=currentGift();
+const values=state.drafts[g.id]||Array(8).fill("");
+$("writingTags").innerHTML=
+`<span class="tag">Lexical L${state.lex}</span>
+<span class="tag">Syntax S${state.syn}</span>`;
+$("lexBank").innerHTML=g.lex[state.lex-1].map(([en,ko])=>`
+<div class="expression"><strong>${esc(en)}</strong>
+<div class="small">${esc(ko)}</div></div>`).join("");
+$("syntaxBank").innerHTML=syntaxRules[state.syn-1]
+.map(([form,meaning])=>`
+<div class="expression"><strong>${esc(form)}</strong>
+<div class="small">${esc(meaning)}</div></div>`).join("");
+$("writingArea").innerHTML=discourseSteps.map((step,i)=>`
+<div class="sentence-card">
+<div><span class="num">${i+1}</span>
+<strong>${esc(step.role)} · ${esc(step.title)}</strong></div>
+<p>${esc(step.guide)}</p>
+<div class="small">🔗 연결 전략: ${esc(step.link)}</div>
+${i>=2?`<div class="small" id="previous${i}" style="margin-top:8px"></div>`:""}
+<textarea class="writing-input" data-index="${i}"
+placeholder="Write a sentence that connects to your paragraph..."
+oninput="updateWriting()">${esc(values[i]||"")}</textarea>
+<button class="mini no-print" onclick="toggleStarter(${i})">
+💡 Sentence Starter</button>
+<div class="example" id="starter${i}">${esc(starters[state.syn-1][i])}</div>
+${i===4||i===5?`
+<button class="mini no-print" onclick="toggleFact(${i})">📚 Cultural Facts</button>
+<div class="example" id="fact${i}">${g.facts.map(f=>`<p>${esc(f)}</p>`).join("")}</div>`:""}
+</div>`).join("");
+updateWriting();
+}
+
+function toggleStarter(i){
+$("starter"+i).classList.toggle("visible");
+}
+function toggleFact(i){
+$("fact"+i).classList.toggle("visible");
+}
+
+function updateWriting(){
+saveDraft();
+const lines=state.drafts[currentGift().id]||[];
+const completed=lines.filter(x=>x.trim()).length;
+$("writingCount").textContent=`${completed} / 8 writing boxes completed`;
+$("writingBar").style.width=`${completed/8*100}%`;
+const paragraph=lines.map(x=>x.trim()).filter(Boolean).join(" ");
+$("livePreview").textContent=paragraph||"Your paragraph will appear here...";
+for(let i=2;i<8;i++){
+const el=$("previous"+i);
+if(!el)continue;
+const previous=lines[i-1]&&lines[i-1].trim();
+el.textContent=previous?
+"Previous sentence: "+previous:
+"먼저 바로 앞 문장을 작성하세요.";
+}
+}
+
+/* STEP 5 */
+function prepareFinal(navigate){
+saveDraft();
+const lines=(state.drafts[currentGift().id]||[])
+.map(x=>x.trim()).filter(Boolean);
+if(lines.length<7){
+if(navigate)alert("최소 7개의 문장 작성 칸을 완성하세요.");
+return false;
+}
+const paragraph=lines.join(" ");
+$("finalTitle").textContent="A Special Gift from Korea: "+currentGift().en;
+$("finalText").textContent=paragraph;
+$("finalTags").innerHTML=
+`<span class="tag">Lexical L${state.lex}</span>
+<span class="tag">Syntax S${state.syn}</span>`;
+const words=paragraph.match(/[A-Za-z]+(?:'[A-Za-z]+)*/g)||[];
+$("finalStats").textContent=
+`${lines.length} writing boxes completed · ${words.length} words`;
+$("modelBox").textContent=currentGift().models[state.syn-1].join(" ");
+$("modelBox").classList.remove("visible");
+renderChecklist();
+if(navigate)go(5);
+return true;
+}
+
+function toggleModel(){
+$("modelBox").classList.toggle("visible");
+}
+
+function renderChecklist(){
+const items=[...baseChecks];
+items.push(state.lex===1?
+"기본 어휘를 문맥에 맞게 사용했나요?":
+state.lex===2?
+"구체적인 문화 관련 어휘를 정확하게 사용했나요?":
+"상징성이나 문화적 의미를 나타내는 어휘를 적절하게 사용했나요?");
+items.push(state.syn===1?
+"단순문의 기본 어순을 확인했나요?":
+state.syn===2?
+"because, when, to부정사 등의 구조를 정확하게 사용했나요?":
+"관계절, 수동태, 복합문의 구조를 정확하게 사용했나요?");
+if(state.checked.length!==items.length)
+state.checked=Array(items.length).fill(false);
+$("checklist").innerHTML=items.map((text,i)=>`
+<label class="checkrow">
+<input type="checkbox" ${state.checked[i]?"checked":""}
+onchange="checkItem(${i},this.checked)">
+<span>${esc(text)}</span></label>`).join("");
+updateChecklist();
+}
+
+function checkItem(i,value){
+state.checked[i]=value;
+updateChecklist();
+}
+
+function updateChecklist(){
+const count=state.checked.filter(Boolean).length;
+$("checkCount").textContent=`${count} / ${state.checked.length} checked`;
+$("checkBar").style.width=`${count/state.checked.length*100}%`;
+$("submitButton").disabled=count!==state.checked.length;
+}
+
+function submitWriting(){
+if(state.checked.some(x=>!x))return;
+const lines=(state.drafts[currentGift().id]||[]).filter(x=>x.trim());
+if(lines.length<7||lines.length>8){
+alert("7~8개의 문장을 작성했는지 확인하세요.");
+return;
+}
+state.submitted=true;
+$("completed").classList.remove("hidden");
+$("completed").scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+function downloadWriting(){
+const lines=(state.drafts[currentGift().id]||[]).filter(Boolean);
+const text="A Special Gift from Korea\n\n"+
+"Gift: "+currentGift().en+"\n"+
+"Lexical Level: "+state.lex+"\n"+
+"Syntactic Level: "+state.syn+"\n\n"+
+lines.join(" ")+"\n\nSelf-check: "+
+state.checked.filter(Boolean).length+"/"+state.checked.length;
+const blob=new Blob(["\uFEFF"+text],{type:"text/plain;charset=utf-8"});
+const url=URL.createObjectURL(blob);
+const a=document.createElement("a");
+a.href=url;a.download="Korean_Gift_Writing.txt";a.click();
+setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+renderGift();
+restartQuiz();
+restartPatterns();
+renderWriting();
+</script>
+</body>
+</html>
